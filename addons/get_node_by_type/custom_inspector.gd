@@ -34,11 +34,15 @@ func _auto_assign_pressed() -> void:
 					undo_redo.add_do_property(_current_object, prop_info.name, found_node)
 					undo_redo.add_undo_property(_current_object, prop_info.name, null)
 				else:
-					print("No match found for", prop_info.name, "(expected:", expected_type, ")")
+					print("No match found for ", prop_info.name, "(expected:", expected_type, ")")
 	undo_redo.commit_action()
 
 func _find_node_by_type(expected_type: String) -> Node:
-	var root = _current_object.get_parent()
+	var root
+	if _current_object.get_parent() is SubViewport:
+		root = _current_object
+	else:
+		root = _current_object.get_parent()
 	if not root or expected_type == "":
 		return null
 	return get.node_by_type(root, expected_type, true)
