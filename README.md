@@ -1,2 +1,28 @@
 # get-node-by-type
 A Godot addon that allows you to fetch nodes by type instead of name. Also can auto populate @export variables via a custom inspector button.
+
+Allows you to fetch the first Node by class_name or native script name instead of 
+by name or an array of Nodes by class_name or native script name.
+
+Registers an autoload singleton called "Get" and provides a custom inspector addition that applies 
+to all Nodes with a script attached.
+You can utilize 2 functions provided in Get which are:
+Get.node_by_type(searchRoot: Node, type_ref, recursive: bool = false)
+Get.nodes_by_type(searchRoot: Node, type_ref, recursive: bool = false)
+
+This provides an alternative to:
+- Using @export and assigning references via the inspector which requires manually connecting 
+	scripts together in the inspector. 
+- Fetching nodes by path which is too flimsy to consider for real usage. 
+- Access by unique name which requires extra clicks to create unique names each time you want to 
+	use them.
+
+It can be used with @onready to provide references to other nodes regardless of name. Much like 
+get_node(), you should avoid using these in process functions and you should cache the results 
+as the recursive versions can be quite heavy to process. Best to utilize in the same way you 
+use get_node(), primarily for initialization.
+
+Finally this adds a button to the inspector for any Node with a script attached which automatically 
+assigns references by type using the above Get Node By Type functionality. This allows you to just
+@export any type you want and not have to manually assign references as long as you only want to
+grab the first reference of a specific type.
