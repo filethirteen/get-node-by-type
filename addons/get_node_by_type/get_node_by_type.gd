@@ -17,37 +17,37 @@ func _matches_type(node: Node, type_ref) -> bool:
 			return true
 	return false
 
-## Get a node by type, search direct children of searchRoot. Returns the first node of type 
+## Get a node by type, search direct children of search_root. Returns the first node of type 
 ## type_ref. Like Unity's GetComponent<T>().
 ## recursive = true is like Unity's GetComponentInChildren<T>().
-func node_by_type(searchRoot: Node, type_ref, recursive: bool = false) -> Node:
-	if not searchRoot:
+func node_by_type(search_root: Node, type_ref, recursive: bool = false) -> Node:
+	if not search_root:
 		return null
 	
 	if recursive:
-		for node in searchRoot.find_children("*", "", true):
+		for node in search_root.find_children("*", "", true):
 			if _matches_type(node, type_ref):
 				return node
 	else:
-		for node in searchRoot.get_children():
+		for node in search_root.get_children():
 			if _matches_type(node, type_ref):
 				return node
 	return null
 
-## Get an array of nodes by type, search only direct children of searchRoot. 
+## Get an array of nodes by type, search only direct children of search_root. 
 ## Like Unity's GetComponents<T>().
 ## recursive = true is like Unity's GetComponentsInChildren<T>().
-func nodes_by_type(searchRoot: Node, type_ref, recursive: bool = false) -> Array:
-	if not searchRoot:
+func nodes_by_type(search_root: Node, type_ref, recursive: bool = false) -> Array:
+	if not search_root:
 		return []
 		
 	var results: Array = []
 	if recursive:
-		for node in searchRoot.find_children("*", "", true):
+		for node in search_root.find_children("*", "", true):
 			if _matches_type(node, type_ref):
 				results.append(node)
 	else:
-		for node in searchRoot.get_children():
+		for node in search_root.get_children():
 			if _matches_type(node, type_ref):
 				results.append(node)
 	return results
