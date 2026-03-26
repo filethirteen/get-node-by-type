@@ -2,6 +2,7 @@
 extends EditorInspectorPlugin
 
 var _current_object: Object
+var get = preload("uid://bb1sq0jheik0t").new()
 
 func _can_handle(object: Object) -> bool:
 	return object is Node and object.get_script() != null
@@ -40,5 +41,4 @@ func _find_node_by_type(expected_type: String) -> Node:
 	var root = _current_object.get_parent()
 	if not root or expected_type == "":
 		return null
-	
-	return Get.ComponentInChildren(root, expected_type)
+	return get.node_by_type(root, expected_type, true)
