@@ -16,6 +16,9 @@ This provides an alternative to:
 - Fetching nodes by path which is too flimsy to consider for real usage. 
 - Access by unique name which requires extra clicks to create unique names each time you want to 
 	use them.
+- Using Node.find_children() directly because it is clunky to use inline in places where
+	you just want to fetch a single instance of a Node such as in your @onready or _ready(). 
+	Additionally find_children() only accepts strings for the type, not the class directly.
 
 It can be used with @onready to provide references to other nodes regardless of name. Much like 
 get_node(), you should avoid using these in process functions and you should cache the results 
