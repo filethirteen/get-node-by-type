@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://examples/example_get_node_by_type.gd" id="1"]
+[ext_resource type="Script" path="res://examples/custom_component.gd" id="2"]
+
+[node name="ExampleGetNodeByType" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8)
+fov = 75.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+light_energy = 0.8
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(20, 1, 20)
+
+[node name="Entities" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Player" type="CharacterBody3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+
+[node name="HealthComponent" type="Node" parent="Entities/Player"]
+script = ExtResource("2")
+label = "health"
+value = 100.0
+
+[node name="SpeedComponent" type="Node" parent="Entities/Player"]
+script = ExtResource("2")
+label = "speed"
+value = 5.0
+
+[node name="PlayerMesh" type="CSGCylinder3D" parent="Entities/Player"]
+radius = 0.5
+height = 2.0
+
+[node name="Obstacle1" type="CSGBox3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+size = Vector3(1, 2, 1)
+
+[node name="Obstacle2" type="CSGBox3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.75, -2)
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="UILayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UILayer/MarginContainer/VBox"]
+layout_mode = 2
+text = "Get Node By Type — Example Scene"
+
+[node name="Subtitle" type="Label" parent="UILayer/MarginContainer/VBox"]
+layout_mode = 2
+text = "Run this scene and check the Output panel for results"
+modulate = Color(0.7, 0.7, 0.7, 1)
+
+[node name="ResultsContainer" type="VBoxContainer" parent="UILayer/MarginContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ResultsLabel" type="Label" parent="UILayer/MarginContainer/VBox/ResultsContainer"]
+layout_mode = 2
+text = "Loading..."
