@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://examples/example_get_node_by_type.gd" id="1"]
-[ext_resource type="Script" path="res://examples/custom_component.gd" id="2"]
+[ext_resource type="Script" path="res://addons/get_node_by_type/examples/example_get_node_by_type.gd" id="1"]
+[ext_resource type="Script" path="res://addons/get_node_by_type/examples/custom_component.gd" id="2"]
 
 [node name="ExampleGetNodeByType" type="Node3D"]
 script = ExtResource("1")
